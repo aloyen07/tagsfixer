@@ -89,8 +89,6 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     annotationProcessor "io.github.llamalad7:mixinextras-common:0.3.6"
-
-    implementation(fg.deobf('blusunrize.immersiveengineering:ImmersiveEngineering:1.16.5-5.1.0-148'))
 }
 
 configurations {
