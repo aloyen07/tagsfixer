@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "ru.aloyenz.tagsfixer.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "tagsfixer.refmap.json",
+  "plugin": "ru.aloyenz.tagsfixer.MixinConfigPlugin",
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "ClientPlayNetHandlerMixin"
+  ]
+}
