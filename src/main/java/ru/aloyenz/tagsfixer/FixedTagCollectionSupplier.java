@@ -10,6 +10,8 @@ import net.minecraft.tags.ITagCollection;
 import net.minecraft.tags.ITagCollectionSupplier;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
+import java.util.HashMap;
 import java.util.Map;
 
 public class FixedTagCollectionSupplier implements ITagCollectionSupplier {
@@ -17,38 +19,38 @@ public class FixedTagCollectionSupplier implements ITagCollectionSupplier {
     private final ITagCollectionSupplier oldTags;
     private final Multimap<ResourceLocation, ResourceLocation> unfoundedTags;
 
-    public FixedTagCollectionSupplier(ITagCollectionSupplier oldTags,
-                                      Multimap<ResourceLocation, ResourceLocation> unfoundedTags) {
+    public FixedTagCollectionSupplier(@Nonnull ITagCollectionSupplier oldTags,
+                                      @Nonnull Multimap<ResourceLocation, ResourceLocation> unfoundedTags) {
         this.oldTags = oldTags;
         this.unfoundedTags = unfoundedTags;
     }
 
     @Override
-    public ITagCollection<Block> getBlocks() {
+    public @Nonnull ITagCollection<Block> getBlocks() {
         return getModifiedTags(oldTags.getBlocks(), new ResourceLocation("minecraft", "block"));
     }
 
     @Override
-    public ITagCollection<Item> getItems() {
+    public @Nonnull ITagCollection<Item> getItems() {
         return getModifiedTags(oldTags.getItems(), new ResourceLocation("minecraft", "item"));
     }
 
     @Override
-    public ITagCollection<Fluid> getFluids() {
+    public @Nonnull ITagCollection<Fluid> getFluids() {
         return getModifiedTags(oldTags.getFluids(), new ResourceLocation("minecraft", "fluid"));
     }
 
     @Override
-    public ITagCollection<EntityType<?>> getEntityTypes() {
+    public @Nonnull ITagCollection<EntityType<?>> getEntityTypes() {
         return getModifiedTags(oldTags.getEntityTypes(), new ResourceLocation("minecraft", "entity"));
     }
 
-    private <T> ITagCollection<T> getModifiedTags(ITagCollection<T> collection,
-                                                               ResourceLocation resourceLocationKey) {
-        Map<ResourceLocation, ITag<T>> tagMap = collection.getAllTags();
+    private @Nonnull <T> ITagCollection<T> getModifiedTags(@Nonnull ITagCollection<T> collection,
+                                                           @Nonnull ResourceLocation resourceLocationKey) {
+        Map<ResourceLocation, ITag<T>> tagMap = new HashMap<>(collection.getAllTags());
 
         for (ResourceLocation toAdd : unfoundedTags.get(resourceLocationKey)) {
-            tagMap.put(toAdd, null);
+            tagMap.put(toAdd, new EmptyTag<>());
         }
 
         return ITagCollection.of(tagMap);

@@ -86,6 +86,8 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     implementation "io.github.llamalad7:mixinextras-common:0.3.6"
+    //implementation fg.deobf("com.chiselsandbits:chiselsandbits:1.0.43");
+    //implementation fg.deobf("com.immersive:immersiveengineering:5.1.0")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     annotationProcessor "io.github.llamalad7:mixinextras-common:0.3.6"

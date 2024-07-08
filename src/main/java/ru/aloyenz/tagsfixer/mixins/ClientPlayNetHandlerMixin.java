@@ -45,7 +45,7 @@ public class ClientPlayNetHandlerMixin {
                     target = "Lorg/apache/logging/log4j/Logger;warn(Ljava/lang/String;Ljava/lang/Object;)V")
     )
     public boolean sendCustomWarn(Logger logger, String oldString, Object missingTagList) {
-        logger.warn("Incomplete server tags, disconnecting. Missing: {}. However, we don't give a damn about it.",
+        logger.warn("Incomplete server tags. Missing: {}. However, we don't give a damn about it.",
                 missingTagList);
 
         return false;
